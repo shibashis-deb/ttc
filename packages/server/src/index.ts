@@ -22,18 +22,18 @@ const clientBuildPath = path.join(__dirname, '../../../packages/client/dist');
 app.use(cors());
 app.use(express.json());
 
-// Root route
-app.get('/', (req, res) => {
+// API routes - these should come before static file serving
+app.use('/api', apiRoutes);
+
+// API health check route
+app.get('/api/health', (req, res) => {
   res.json({ message: 'Server is running', dbConnected: db.isConnected });
 });
-
-// API routes
-app.use('/api', apiRoutes);
 
 // Serve static files from client build
 app.use(express.static(clientBuildPath));
 
-// Serve index.html for any routes not handled by API
+// Serve index.html for any routes not handled by API or static files
 app.get('*', (req, res) => {
   // Skip API routes
   if (req.path.startsWith('/api')) {
