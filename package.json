@@ -8,7 +8,8 @@
     "build:client": "pnpm --filter client build",
     "build:server": "pnpm --filter server build",
     "build": "pnpm run build:client && pnpm run build:server",
-    "start": "pnpm --filter server start"
+    "start": "pnpm --filter server start",
+    "render-build": "pnpm install && pnpm build"
   },
   "keywords": [],
   "author": "ttc",
