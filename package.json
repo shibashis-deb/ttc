@@ -1,0 +1,14 @@
+{
+  "name": "ttc",
+  "version": "1.0.0",
+  "description": "The Tshirt Company",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm -r dev",
+    "build": "pnpm -r build",
+    "start": "pnpm --filter server start"
+  },
+  "keywords": [],
+  "author": "ttc",
+  "license": "ISC"
+}
