@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { testApi } from './api'
+import Counter from './components/Counter'
 
 function App() {
   const [apiMessage, setApiMessage] = useState('')
@@ -25,7 +26,7 @@ function App() {
       <header>
         <h1>TTC App</h1>
       </header>
-      <main className="container">
+      <main className="container" style={{ maxWidth: '800px', margin: '0 auto', padding: '20px' }}>
         <p>Welcome to the minimal fullstack app!</p>
         <div style={{ marginTop: '20px', padding: '10px', border: '1px solid #ccc', borderRadius: '4px' }}>
           <h2>API Test</h2>
@@ -35,6 +36,9 @@ function App() {
             <p>Server response: <strong>{apiMessage}</strong></p>
           )}
         </div>
+        
+        {/* Counter Component */}
+        <Counter initialValue={5} />
       </main>
     </div>
   )
