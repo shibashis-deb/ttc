@@ -3,9 +3,12 @@
   "version": "1.0.0",
   "description": "Express server with PostgreSQL and JWT",
   "main": "dist/index.js",
+  "type": "module",
   "scripts": {
-    "dev": "nodemon --exec ts-node src/index.ts",
+    "dev": "nodemon --exec ts-node --esm src/index.ts",
     "build": "tsc",
+    "build:client": "cd ../client && npm run build",
+    "build:all": "npm run build:client && npm run build",
     "start": "node dist/index.js"
   },
   "dependencies": {

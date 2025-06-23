@@ -4,7 +4,7 @@
  * Defines the User interface and database operations for users
  */
 
-import { db } from './db';
+import { db } from './db.js';
 
 // User interface based on the database schema
 export interface User {

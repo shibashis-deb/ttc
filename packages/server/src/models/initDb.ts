@@ -4,7 +4,7 @@
  * Creates tables and inserts initial data if they don't exist
  */
 
-import { db } from './db';
+import { db } from './db.js';
 
 export async function initializeDatabase() {
   try {

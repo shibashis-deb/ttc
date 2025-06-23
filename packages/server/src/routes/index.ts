@@ -5,14 +5,14 @@
  */
 
 import express from 'express';
-import userRoutes from './userRoutes';
+import userRoutes from './userRoutes.js';
 
 const router = express.Router();
 
 // Health check endpoint
 router.get('/health', async (req, res) => {
   try {
-    const { db } = await import('../models/db');
+    const { db } = await import('../models/db.js');
     const result = await db.query('SELECT NOW()');
     res.json({ 
       status: 'ok', 

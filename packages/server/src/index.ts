@@ -1,13 +1,22 @@
 import express from 'express';
 import cors from 'cors';
-import { config } from './config';
-import { db } from './models/db';
-import apiRoutes from './routes';
-import { initializeDatabase } from './models/initDb';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { config } from './config/index.js';
+import { db } from './models/db.js';
+import apiRoutes from './routes/index.js';
+import { initializeDatabase } from './models/initDb.js';
 
 // Initialize Express app
 const app = express();
 const PORT = config.server.port;
+
+// Setup for __dirname in ES module scope
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Path to client build directory
+const clientBuildPath = path.join(__dirname, '../../../packages/client/dist');
 
 // Middleware
 app.use(cors());
@@ -20,6 +29,19 @@ app.get('/', (req, res) => {
 
 // API routes
 app.use('/api', apiRoutes);
+
+// Serve static files from client build
+app.use(express.static(clientBuildPath));
+
+// Serve index.html for any routes not handled by API
+app.get('*', (req, res) => {
+  // Skip API routes
+  if (req.path.startsWith('/api')) {
+    return res.status(404).json({ message: 'API endpoint not found' });
+  }
+  
+  res.sendFile(path.join(clientBuildPath, 'index.html'));
+});
 
 // Start server
 async function startServer() {

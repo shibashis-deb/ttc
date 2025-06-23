@@ -5,7 +5,9 @@
   "private": true,
   "scripts": {
     "dev": "pnpm -r dev",
-    "build": "pnpm -r build",
+    "build:client": "pnpm --filter client build",
+    "build:server": "pnpm --filter server build",
+    "build": "pnpm run build:client && pnpm run build:server",
     "start": "pnpm --filter server start"
   },
   "keywords": [],
