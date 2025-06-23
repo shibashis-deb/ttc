@@ -2,7 +2,7 @@ services:
   - type: web
     name: ttc-app
     env: node
-    buildCommand: pnpm install && pnpm build
+    buildCommand: pnpm install && pnpm build && cd packages/server && pnpm run postbuild
     startCommand: cd packages/server && node dist/index.js
     envVars:
       - key: NODE_ENV
@@ -10,4 +10,4 @@ services:
       - key: PORT
         value: 10000
       - key: DATABASE_URL
-        sync: false
+        value: postgresql://ttc-db_owner:npg_c9G8zoIqnPEd@ep-small-flower-a863t5i1-pooler.eastus2.azure.neon.tech/ttc-db?sslmode=require

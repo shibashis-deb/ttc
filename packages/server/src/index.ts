@@ -15,8 +15,13 @@ const PORT = config.server.port;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Path to client build directory
-const clientBuildPath = path.join(__dirname, '../../../packages/client/dist');
+// Path to client build directory - handle both development and production environments
+const clientBuildPath = process.env.NODE_ENV === 'production'
+  ? path.join(__dirname, '../client/dist')
+  : path.join(__dirname, '../../../packages/client/dist');
+
+console.log(`Client build path: ${clientBuildPath}`);
+console.log(`Current directory: ${__dirname}`);
 
 // Middleware
 app.use(cors());
@@ -59,6 +64,7 @@ async function startServer() {
     // Start Express server
     app.listen(PORT, () => {
       console.log(`Server running on port ${PORT}`);
+      console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
       console.log(`API available at http://localhost:${PORT}/api/users`);
     });
   } catch (error) {
