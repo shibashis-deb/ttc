@@ -10,7 +10,16 @@ const app = express();
 const PORT = config.server.port;
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: [
+    'http://localhost:3000',  // Local development client
+    'http://localhost:5173',  // Vite default port
+    'https://ttc-client.onrender.com'  // Production client
+  ],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
+}));
 app.use(express.json());
 
 // API routes - these should come before static file serving
