@@ -35,13 +35,13 @@ app.use((req, res, next) => {
 // Regular middleware
 app.use(express.json());
 
-// API routes - these should come before static file serving
-app.use('/api', apiRoutes);
-
-// API health check route
+// API health check route - defined before other API routes to ensure it's accessible
 app.get('/api/health', (req, res) => {
   res.json({ message: 'Server is running', dbConnected: db.isConnected });
 });
+
+// API routes
+app.use('/api', apiRoutes);
 app.get('*', (req, res) => {
   return res.status(404).json({ message: 'API endpoint not found' });
 });
@@ -49,6 +49,11 @@ app.get('*', (req, res) => {
 // Start server
 async function startServer() {
   try {
+    console.log('Starting server with configuration:');
+    console.log(`PORT: ${PORT}`);
+    console.log(`NODE_ENV: ${process.env.NODE_ENV || 'development'}`);
+    console.log(`Database URL: ${config.database.url ? '(configured)' : '(missing)'}`);
+    
     // Connect to database
     const connected = await db.connect();
     
