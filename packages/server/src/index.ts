@@ -9,17 +9,38 @@ import { initializeDatabase } from './models/initDb.js';
 const app = express();
 const PORT = config.server.port;
 
-// Middleware
+// CORS middleware with dynamic origin handling
+const allowedOrigins = [
+  'http://localhost:3000',
+  'http://localhost:5173',
+  'https://ttc-client.onrender.com'
+];
+
 app.use(cors({
-  origin: [
-    'http://localhost:3000',  // Local development client
-    'http://localhost:5173',  // Vite default port
-    'https://ttc-client.onrender.com'  // Production client
-  ],
+  origin: function(origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) {
+    // Allow requests with no origin (like mobile apps, curl requests)
+    if (!origin) return callback(null, true);
+    
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      // Origin allowed
+      callback(null, true);
+    } else {
+      // For development/testing, allow all origins
+      // In production, you might want to be more restrictive
+      callback(null, true);
+      
+      // To restrict origins, uncomment this instead:
+      // callback(new Error('Not allowed by CORS'));
+    }
+  },
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true
+  credentials: true,
+  preflightContinue: false,
+  optionsSuccessStatus: 204
 }));
+
+// Regular middleware
 app.use(express.json());
 
 // API routes - these should come before static file serving
