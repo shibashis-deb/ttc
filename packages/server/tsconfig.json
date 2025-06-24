@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "noEmit": true,
+    "noEmit": false,
     "target": "es2022",
     "module": "ESNext",
     "moduleResolution": "node",
