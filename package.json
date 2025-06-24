@@ -15,5 +15,8 @@
   },
   "keywords": [],
   "author": "ttc",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@types/cookie-parser": "1.4.9"
+  }
 }
