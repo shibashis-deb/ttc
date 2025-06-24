@@ -4,12 +4,14 @@
   "description": "The Tshirt Company",
   "private": true,
   "scripts": {
+    "client:dev": "pnpm --filter client dev",
+    "client:build": "pnpm --filter client build",
+    "client:preview": "pnpm --filter client preview",
+    "server:dev": "pnpm --filter server dev",
+    "server:build": "pnpm --filter server build",
+    "server:start": "pnpm --filter server start",
     "dev": "pnpm -r dev",
-    "build:client": "pnpm --filter client build",
-    "build:server": "pnpm --filter server build",
-    "build": "pnpm run build:client && pnpm run build:server",
-    "start": "pnpm --filter server start",
-    "render-build": "pnpm install && pnpm build"
+    "build": "pnpm run client:build && pnpm run server:build"
   },
   "keywords": [],
   "author": "ttc",

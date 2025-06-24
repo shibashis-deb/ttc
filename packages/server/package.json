@@ -7,9 +7,6 @@
   "scripts": {
     "dev": "nodemon --exec ts-node --esm src/index.ts",
     "build": "tsc",
-    "build:client": "cd ../client && npm run build",
-    "build:all": "npm run build:client && npm run build",
-    "postbuild": "mkdir -p dist/client && cp -r ../client/dist dist/client",
     "start": "node dist/index.js"
   },
   "dependencies": {

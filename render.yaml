@@ -1,8 +1,8 @@
 services:
   - type: web
-    name: ttc-app
+    name: ttc-api
     env: node
-    buildCommand: pnpm install && pnpm build && cd packages/server && pnpm run postbuild
+    buildCommand: pnpm install && pnpm run server:build
     startCommand: cd packages/server && node dist/index.js
     envVars:
       - key: NODE_ENV
