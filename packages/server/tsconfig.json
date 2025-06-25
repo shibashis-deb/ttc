@@ -2,9 +2,9 @@
   "compilerOptions": {
     "noEmit": false,
     "target": "es2022",
-    "module": "ESNext",
-    "moduleResolution": "node",
-    "lib": ["ES2020"],
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "lib": ["ES2022"],
     "outDir": "./dist",
     "rootDir": "./src",
     "strict": true,
@@ -13,10 +13,7 @@
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
-    "baseUrl": "./src",
-    "paths": {
-      "*": ["*", "./*"]
-    }
+    "baseUrl": "./src"
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]

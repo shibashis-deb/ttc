@@ -1,9 +1,9 @@
 import express from "express";
 import cookieParser from "cookie-parser";
-import { config } from "./config/index";
-import { db } from "./models/db";
-import apiRoutes from "./routes/index";
-import { initializeDatabase } from "./models/initDb";
+import { config } from "./config/index.js";
+import { db } from "./models/db.js";
+import apiRoutes from "./routes/index.js";
+import { initializeDatabase } from "./models/initDb.js";
 
 // Initialize Express app
 const app = express();
@@ -49,7 +49,7 @@ async function startServer() {
     console.log(`PORT: ${process.env.PORT}`);
     console.log(`NODE_ENV: ${process.env.NODE_ENV || "development"}`);
     console.log(
-      `Database URL: ${config.database.url ? "(configured)" : "(missing)"}`
+      `Database URL: ${process.env.DATABASE_URL ? "(configured)" : "(missing)"}`
     );
 
     // Connect to database
@@ -63,11 +63,11 @@ async function startServer() {
     await initializeDatabase();
 
     // Start Express server
-    app.listen(process.env.PORT, () => {
-      console.log(`Server running on port ${process.env.PORT}`);
-      console.log(`Environment: ${process.env.NODE_ENV || "development"}`);
+    app.listen(config.server.port, () => {
+      console.log(`Server running on port ${config.server.port}`);
+      console.log(`Environment: ${config.server.nodeEnv}`);
       console.log(
-        `API available at http://localhost:${process.env.PORT}/api/users`
+        `API available at http://localhost:${config.server.port}/api/users`
       );
     });
   } catch (error) {
